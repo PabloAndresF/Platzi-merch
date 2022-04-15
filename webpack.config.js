@@ -1,15 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+// const Dotenv = require('dotenv-webpack');
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
-  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath:'/'
   },
+  mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -31,12 +34,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(s*)css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
+          'sass-loader',
         ],
       },
     ],
@@ -46,16 +50,19 @@ module.exports = {
       template: './public/index.html',
       filename: './index.html',
     }),
-
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css',
     }),
+   
+    new webpack.DefinePlugin({
+      'process.env.PAYPAL_CLIENT_PP': JSON.stringify(process.env.PAYPAL_CLIENT_PP),
+      'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(process.env.GOOGLE_MAPS_API_KEY),
+		}),
   ],
   devServer: {
-    static: path.join(__dirname, 'dist'),
-    compress: false,
+    allowedHosts: path.join(__dirname, 'dist'),
     historyApiFallback: true,
-    port: 3000,
+    compress: true,
+    port: 3005,
   },
-  performance: { hints: false },
 };
