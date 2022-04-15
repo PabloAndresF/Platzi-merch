@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath:'/'
+    publicPath: '/',
   },
   mode: 'development',
   resolve: {
@@ -39,7 +39,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
-          'sass-loader',
+       
         ],
       },
     ],
@@ -52,7 +52,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css',
     }),
-   
   ],
   devServer: {
     allowedHosts: path.join(__dirname, 'dist'),
@@ -60,4 +59,5 @@ module.exports = {
     compress: true,
     port: 3005,
   },
+  performance: { hints: false }
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
-import Map from "../components/Map";
+import Map from '../components/Map';
 import '../styles/components/Success.css';
 
 function Success() {
@@ -12,7 +12,7 @@ function Success() {
         <h2>{`${buyer.name},Gracias por tu compra`}</h2>
         <div className="Success-map">
           <span>Tu pedido lelgara en 3 dias a tu direccion:</span>
-          <Map/>
+          <Map />
         </div>
       </div>
     </div>
